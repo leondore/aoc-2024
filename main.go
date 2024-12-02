@@ -6,6 +6,7 @@ import (
 	"os"
 
 	"github.com/leondore/aoc-2024/day1"
+	"github.com/leondore/aoc-2024/day2"
 )
 
 const inputPath = "./inputs"
@@ -24,8 +25,16 @@ func main() {
 			log.Fatal(err)
 		}
 
-		fmt.Println("Day 1 resuls: -------")
+		fmt.Println("Day 1 results: -------")
 		fmt.Printf("Total Distance: %d\n", dist)
 		fmt.Printf("Similarity Score: %d\n", score)
+	case "day2":
+		safeReports, err := day2.Day2(inputPath + "/day2.txt")
+		if err != nil {
+			log.Fatal(err)
+		}
+
+		fmt.Println("Day 2 results: -------")
+		fmt.Printf("Count of safe reports: %d\n", safeReports)
 	}
 }

@@ -3,14 +3,17 @@ package day1
 import (
 	"reflect"
 	"testing"
-
-	"github.com/leondore/aoc-2024/utils"
 )
 
-const inputPath = "../inputs/test.txt"
-
 func TestDay1(t *testing.T) {
-	pairs, _ := utils.ProcessInput(inputPath)
+	pairs := []string{
+		"3 4",
+		"4 3",
+		"2 5",
+		"1 3",
+		"3 9",
+		"3 3",
+	}
 
 	t.Run("processPairs - test it returns two ordered lists", func(t *testing.T) {
 		wantLeft := []int{1, 2, 3, 3, 3, 4}

@@ -5,7 +5,7 @@ import (
 	"testing"
 )
 
-const inputPath = "../inputs/test.txt"
+const inputPath = "./test.txt"
 
 func TestProcessInput(t *testing.T) {
 	got, err := ProcessInput(inputPath)
