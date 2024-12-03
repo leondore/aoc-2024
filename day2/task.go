@@ -22,10 +22,14 @@ func Day2(path string) (int, error) {
 	var wg sync.WaitGroup
 
 	for _, r := range reports {
-		wg.Add(1)
+		report, err := marshalReport(r)
+		if err != nil {
+			return 0, fmt.Errorf("could not marshall report: %w", err)
+		}
 
+		wg.Add(1)
 		go func() {
-			if isReportSafe(r) {
+			if isReportSafe(report, true) {
 				count.Add(1)
 			}
 			wg.Done()
@@ -37,34 +41,53 @@ func Day2(path string) (int, error) {
 	return int(count.Load()), nil
 }
 
-func isReportSafe(report string) bool {
-	asc := true
-	s := strings.Split(report, " ")
+func isReportSafe(report []int, initial bool) bool {
+	ascCount, descCount := 0, 0
 
-	if len(s) < 2 {
+	if len(report) < 2 {
 		return true
 	}
 
-	for i := 1; i < len(s); i++ {
-		x, err := strconv.Atoi(s[i-1])
-		if err != nil {
-			return false
-		}
-		y, err := strconv.Atoi(s[i])
-		if err != nil {
+	for i := 1; i < len(report); i++ {
+		prev, curr := report[i-1], report[i]
+
+		if !isPairSafe(prev, curr) {
+			if initial {
+				return isReportSafe(append(report[:i], report[i+1:]...), false) || isReportSafe(append(report[:i-1], report[i:]...), false)
+			}
 			return false
 		}
 
-		if i == 1 && y < x {
-			asc = false
-		}
-
-		if x == y || y > x != asc || absDiff(x, y) > maxDiff {
-			return false
+		if curr > prev {
+			ascCount += 1
+		} else {
+			descCount += 1
 		}
 	}
 
-	return true
+	comparisons := len(report) - 1
+	if initial {
+		return ascCount >= (comparisons-1) || descCount >= (comparisons-1)
+	}
+	return ascCount == comparisons || descCount == comparisons
+}
+
+func isPairSafe(x, y int) bool {
+	return x != y && absDiff(x, y) <= maxDiff
+}
+
+func marshalReport(report string) ([]int, error) {
+	marshaled := []int{}
+
+	for _, level := range strings.Split(report, " ") {
+		x, err := strconv.Atoi(level)
+		if err != nil {
+			return marshaled, err
+		}
+		marshaled = append(marshaled, x)
+	}
+
+	return marshaled, nil
 }
 
 func absDiff(x, y int) (z int) {
