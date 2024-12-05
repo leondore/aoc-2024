@@ -7,6 +7,7 @@ import (
 
 	"github.com/leondore/aoc-2024/day1"
 	"github.com/leondore/aoc-2024/day2"
+	"github.com/leondore/aoc-2024/day3"
 )
 
 const inputPath = "./inputs"
@@ -36,5 +37,13 @@ func main() {
 
 		fmt.Println("Day 2 results: -------")
 		fmt.Printf("Count of safe reports: %d\n", safeReports)
+	case "day3":
+		res, err := day3.Day3(inputPath + "/day3.txt")
+		if err != nil {
+			log.Fatal(err)
+		}
+
+		fmt.Println("Day 3 results: -------")
+		fmt.Printf("Program result: %d\n", res)
 	}
 }
