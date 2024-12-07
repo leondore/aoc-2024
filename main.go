@@ -8,6 +8,7 @@ import (
 	"github.com/leondore/aoc-2024/day1"
 	"github.com/leondore/aoc-2024/day2"
 	"github.com/leondore/aoc-2024/day3"
+	"github.com/leondore/aoc-2024/day4"
 )
 
 const inputPath = "./inputs"
@@ -45,5 +46,13 @@ func main() {
 
 		fmt.Println("Day 3 results: -------")
 		fmt.Printf("Program result: %d\n", res)
+	case "day4":
+		res, err := day4.Day4(inputPath + "/day4.txt")
+		if err != nil {
+			log.Fatal(err)
+		}
+
+		fmt.Println("Day 4 results: -------")
+		fmt.Printf("Word occurrences: %d\n", res)
 	}
 }
