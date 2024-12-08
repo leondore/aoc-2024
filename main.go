@@ -9,6 +9,7 @@ import (
 	"github.com/leondore/aoc-2024/day2"
 	"github.com/leondore/aoc-2024/day3"
 	"github.com/leondore/aoc-2024/day4"
+	"github.com/leondore/aoc-2024/day5"
 )
 
 const inputPath = "./inputs"
@@ -54,5 +55,14 @@ func main() {
 
 		fmt.Println("Day 4 results: -------")
 		fmt.Printf("Word occurrences: %d\n", res)
+	case "day5":
+		ordered, unordered, err := day5.Day5(inputPath+"/day5_instructions.txt", inputPath+"/day5_updates.txt")
+		if err != nil {
+			log.Fatal(err)
+		}
+
+		fmt.Println("Day 5 results: -------")
+		fmt.Printf("Sum of ordered updates: %d\n", ordered)
+		fmt.Printf("Sum of un-ordered updates: %d\n", unordered)
 	}
 }
