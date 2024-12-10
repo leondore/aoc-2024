@@ -10,6 +10,7 @@ import (
 	"github.com/leondore/aoc-2024/day3"
 	"github.com/leondore/aoc-2024/day4"
 	"github.com/leondore/aoc-2024/day5"
+	"github.com/leondore/aoc-2024/day6"
 )
 
 const inputPath = "./inputs"
@@ -64,5 +65,13 @@ func main() {
 		fmt.Println("Day 5 results: -------")
 		fmt.Printf("Sum of ordered updates: %d\n", ordered)
 		fmt.Printf("Sum of un-ordered updates: %d\n", unordered)
+	case "day6":
+		visited, err := day6.Day6(inputPath + "/day6.txt")
+		if err != nil {
+			log.Fatal(err)
+		}
+
+		fmt.Println("Day 6 results: -------")
+		fmt.Printf("Visited positions: %d\n", visited)
 	}
 }
