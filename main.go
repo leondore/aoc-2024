@@ -66,12 +66,13 @@ func main() {
 		fmt.Printf("Sum of ordered updates: %d\n", ordered)
 		fmt.Printf("Sum of un-ordered updates: %d\n", unordered)
 	case "day6":
-		visited, err := day6.Day6(inputPath + "/day6.txt")
+		visited, stuck, err := day6.Day6(inputPath + "/day6.txt")
 		if err != nil {
 			log.Fatal(err)
 		}
 
 		fmt.Println("Day 6 results: -------")
 		fmt.Printf("Visited positions: %d\n", visited)
+		fmt.Printf("Times guard got stuck: %d\n", stuck)
 	}
 }
