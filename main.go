@@ -11,6 +11,7 @@ import (
 	"github.com/leondore/aoc-2024/day4"
 	"github.com/leondore/aoc-2024/day5"
 	"github.com/leondore/aoc-2024/day6"
+	"github.com/leondore/aoc-2024/day7"
 )
 
 const inputPath = "./inputs"
@@ -74,5 +75,13 @@ func main() {
 		fmt.Println("Day 6 results: -------")
 		fmt.Printf("Visited positions: %d\n", visited)
 		fmt.Printf("Times guard got stuck: %d\n", stuck)
+	case "day7":
+		result, err := day7.Day7(inputPath + "/day7.txt")
+		if err != nil {
+			log.Fatal(err)
+		}
+
+		fmt.Println("Day 7 results: -------")
+		fmt.Printf("Total calibration result: %d\n", result)
 	}
 }
