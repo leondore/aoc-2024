@@ -2,6 +2,26 @@ package grid
 
 import "testing"
 
+func TestMove(t *testing.T) {
+	cases := []struct {
+		coord Coordinate
+		dir   Coordinate
+		want  Coordinate
+	}{
+		{Coordinate{X: 3, Y: 1}, Coordinate{X: 2, Y: -1}, Coordinate{X: 5, Y: 0}},
+		{Coordinate{X: 3, Y: 1}, Coordinate{X: 3, Y: 1}, Coordinate{X: 6, Y: 2}},
+		{Coordinate{X: 1, Y: 2}, Coordinate{X: 2, Y: 4}, Coordinate{X: 3, Y: 6}},
+	}
+
+	for _, c := range cases {
+		c.coord.Move(c.dir)
+
+		if c.coord != c.want {
+			t.Errorf("got %+v, want %+v", c.coord, c.want)
+		}
+	}
+}
+
 func TestCoordinateInBounds(t *testing.T) {
 	cases := []struct {
 		coord Coordinate

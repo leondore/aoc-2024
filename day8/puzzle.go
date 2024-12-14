@@ -10,20 +10,24 @@ type Map struct {
 	Locations map[rune][]grid.Coordinate
 }
 
-func (m *Map) FindAntinodes(c1, c2 grid.Coordinate) (grid.Coordinate, grid.Coordinate) {
+func (m *Map) FindAntinodes(c1, c2 grid.Coordinate, list map[grid.Coordinate]bool) int {
 	limit := len(m.Grid)
 	diff := grid.Coordinate{X: c1.X - c2.X, Y: c1.Y - c2.Y}
+	count := 0
 
-	an1 := grid.Coordinate{X: c1.X + diff.X, Y: c1.Y + diff.Y}
-	if !an1.InBounds(limit - 1) {
-		an1 = grid.Coordinate{}
-	}
-	an2 := grid.Coordinate{X: c2.X - diff.X, Y: c2.Y - diff.Y}
-	if !an2.InBounds(limit - 1) {
-		an2 = grid.Coordinate{}
+	for c1.InBounds(limit - 1) {
+		list[c1] = true
+		c1.Move(diff)
+		count++
 	}
 
-	return an1, an2
+	for c2.InBounds(limit - 1) {
+		list[c2] = true
+		c2.Move(grid.Coordinate{X: -diff.X, Y: -diff.Y})
+		count++
+	}
+
+	return count
 }
 
 func (m *Map) CountAntinodes() int {
@@ -32,13 +36,7 @@ func (m *Map) CountAntinodes() int {
 	for _, antennas := range m.Locations {
 		for i := 0; i < len(antennas)-1; i++ {
 			for j := i + 1; j < len(antennas); j++ {
-				an1, an2 := m.FindAntinodes(antennas[i], antennas[j])
-				if an1 != (grid.Coordinate{}) {
-					antinodes[an1] = true
-				}
-				if an2 != (grid.Coordinate{}) {
-					antinodes[an2] = true
-				}
+				m.FindAntinodes(antennas[i], antennas[j], antinodes)
 			}
 		}
 	}

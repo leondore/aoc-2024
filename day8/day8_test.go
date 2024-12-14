@@ -39,42 +39,35 @@ func TestNewMap(t *testing.T) {
 func TestFindAntinodes(t *testing.T) {
 	g := grid.Grid(test)
 	city := NewMap(g)
+	list := map[grid.Coordinate]bool{}
 
 	cases := []struct {
 		coord1 grid.Coordinate
 		coord2 grid.Coordinate
-		want1  grid.Coordinate
-		want2  grid.Coordinate
+		want   int
 	}{
 		{
 			grid.Coordinate{X: 8, Y: 1},
 			grid.Coordinate{X: 5, Y: 2},
-			grid.Coordinate{X: 11, Y: 0},
-			grid.Coordinate{X: 2, Y: 3},
+			4,
 		},
 		{
 			grid.Coordinate{X: 8, Y: 1},
 			grid.Coordinate{X: 4, Y: 4},
-			grid.Coordinate{},
-			grid.Coordinate{X: 0, Y: 7},
+			3,
 		},
 		{
 			grid.Coordinate{X: 8, Y: 8},
 			grid.Coordinate{X: 9, Y: 9},
-			grid.Coordinate{X: 7, Y: 7},
-			grid.Coordinate{X: 10, Y: 10},
+			12,
 		},
 	}
 
 	for _, c := range cases {
-		c1, c2 := city.FindAntinodes(c.coord1, c.coord2)
+		got := city.FindAntinodes(c.coord1, c.coord2, list)
 
-		if c1 != c.want1 {
-			t.Errorf("got %+v, want %+v", c1, c.want1)
-		}
-
-		if c2 != c.want2 {
-			t.Errorf("got %+v, want %+v", c2, c.want2)
+		if got != c.want {
+			t.Errorf("got %+v, want %+v", got, c.want)
 		}
 	}
 }
@@ -83,7 +76,7 @@ func TestCountAntinodes(t *testing.T) {
 	g := grid.Grid(test)
 	city := NewMap(g)
 
-	want := 14
+	want := 34
 	got := city.CountAntinodes()
 
 	if got != want {
