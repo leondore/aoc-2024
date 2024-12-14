@@ -12,6 +12,7 @@ import (
 	"github.com/leondore/aoc-2024/day5"
 	"github.com/leondore/aoc-2024/day6"
 	"github.com/leondore/aoc-2024/day7"
+	"github.com/leondore/aoc-2024/day8"
 )
 
 const inputPath = "./inputs"
@@ -83,5 +84,13 @@ func main() {
 
 		fmt.Println("Day 7 results: -------")
 		fmt.Printf("Total calibration result: %d\n", result)
+	case "day8":
+		result, err := day8.Day8(inputPath + "/day8.txt")
+		if err != nil {
+			log.Fatal(err)
+		}
+
+		fmt.Println("Day 8 results: -------")
+		fmt.Printf("Unique antinodes: %d\n", result)
 	}
 }

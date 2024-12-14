@@ -12,7 +12,7 @@ const (
 	guard           = '^'
 	obstacle        = '#'
 	specialObstacle = 'O'
-	maxRepeatVisits = 5
+	cardinalPoints  = 4
 )
 
 type Coordinate struct {
@@ -141,7 +141,7 @@ func SimulatePatrolRoute(scene *Scene) (map[Coordinate]int, bool) {
 			scene.dir = (scene.dir + 1) % 4
 		}
 
-		if visited[scene.GetGuard()] >= maxRepeatVisits {
+		if visited[scene.GetGuard()] > cardinalPoints {
 			stuck = true
 			break
 		}
