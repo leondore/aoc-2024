@@ -13,6 +13,7 @@ import (
 	"github.com/leondore/aoc-2024/day6"
 	"github.com/leondore/aoc-2024/day7"
 	"github.com/leondore/aoc-2024/day8"
+	"github.com/leondore/aoc-2024/day9"
 )
 
 const inputPath = "./inputs"
@@ -92,5 +93,10 @@ func main() {
 
 		fmt.Println("Day 8 results: -------")
 		fmt.Printf("Unique antinodes: %d\n", result)
+	case "day9":
+		result, _ := day9.Day9(inputPath + "/day9.txt")
+
+		fmt.Println("Day 9 results: -------")
+		fmt.Printf("Filesystem checksum: %d\n", result)
 	}
 }
