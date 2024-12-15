@@ -1,6 +1,7 @@
 package day9
 
 import (
+	"fmt"
 	"os"
 	"strconv"
 	"strings"
@@ -34,6 +35,8 @@ func CalculateSpace(diskmap []byte) (total int, used int, free int) {
 
 func Day9(path string) (int, string) {
 	diskmap, _ := os.ReadFile(path)
+	total, used, free := CalculateSpace(diskmap)
+	fmt.Println(total, used, free)
 
 	checksum := 0
 	emptySpace := 0
