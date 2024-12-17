@@ -94,9 +94,13 @@ func main() {
 		fmt.Println("Day 8 results: -------")
 		fmt.Printf("Unique antinodes: %d\n", result)
 	case "day9":
-		result, _ := day9.Day9(inputPath + "/day9.txt")
+		result, disk, err := day9.CompactFiles(inputPath + "/day9.txt")
+		if err != nil {
+			log.Fatal(err)
+		}
 
 		fmt.Println("Day 9 results: -------")
 		fmt.Printf("Filesystem checksum: %d\n", result)
+		fmt.Printf("Disk representation: %s\n", disk)
 	}
 }

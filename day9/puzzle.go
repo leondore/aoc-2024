@@ -1,13 +1,12 @@
 package day9
 
 import (
-	"fmt"
 	"os"
 	"strconv"
 	"strings"
 )
 
-var digitMap = map[byte]int{
+var DigitMap = map[byte]int{
 	'0': 0,
 	'1': 1,
 	'2': 2,
@@ -20,14 +19,12 @@ var digitMap = map[byte]int{
 	'9': 9,
 }
 
-func CalculateSpace(diskmap []byte) (total int, used int, free int) {
+func CalculateSpace(diskmap []byte) (used int, free int) {
 	for i := 0; i < len(diskmap); i++ {
-		total += digitMap[diskmap[i]]
-
 		if i%2 == 0 {
-			used += digitMap[diskmap[i]]
+			used += DigitMap[diskmap[i]]
 		} else {
-			free += digitMap[diskmap[i]]
+			free += DigitMap[diskmap[i]]
 		}
 	}
 	return
@@ -35,8 +32,6 @@ func CalculateSpace(diskmap []byte) (total int, used int, free int) {
 
 func Day9(path string) (int, string) {
 	diskmap, _ := os.ReadFile(path)
-	total, used, free := CalculateSpace(diskmap)
-	fmt.Println(total, used, free)
 
 	checksum := 0
 	emptySpace := 0
@@ -53,7 +48,7 @@ func Day9(path string) (int, string) {
 	}
 
 	for i := 0; i < len(diskmap); i++ {
-		space := digitMap[diskmap[i]]
+		space := DigitMap[diskmap[i]]
 		id := i / 2
 
 		if i%2 == 0 {
@@ -77,9 +72,9 @@ func Day9(path string) (int, string) {
 				} else {
 					tailIdx := len(diskmap) - 1
 					id = tailIdx / 2
-					tailSpace = digitMap[diskmap[tailIdx]]
+					tailSpace = DigitMap[diskmap[tailIdx]]
 
-					emptySpace += digitMap[diskmap[tailIdx-1]]
+					emptySpace += DigitMap[diskmap[tailIdx-1]]
 					diskmap = diskmap[:len(diskmap)-2]
 				}
 
