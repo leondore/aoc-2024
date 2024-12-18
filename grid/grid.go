@@ -21,3 +21,7 @@ func (c *Coordinate) Move(dir Coordinate) {
 func (c *Coordinate) InBounds(limit int) bool {
 	return c.X >= 0 && c.X <= limit && c.Y >= 0 && c.Y <= limit
 }
+
+func (c *Coordinate) NewInDir(dir Coordinate) Coordinate {
+	return Coordinate{c.X + dir.X, c.Y + dir.Y}
+}

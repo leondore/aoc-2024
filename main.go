@@ -6,6 +6,7 @@ import (
 	"os"
 
 	"github.com/leondore/aoc-2024/day1"
+	"github.com/leondore/aoc-2024/day10"
 	"github.com/leondore/aoc-2024/day2"
 	"github.com/leondore/aoc-2024/day3"
 	"github.com/leondore/aoc-2024/day4"
@@ -102,5 +103,13 @@ func main() {
 		fmt.Println("Day 9 results: -------")
 		fmt.Printf("Filesystem checksum: %d\n", result)
 		fmt.Printf("Disk representation: %s\n", disk)
+	case "day10":
+		result, err := day10.Day10(inputPath + "/day10.txt")
+		if err != nil {
+			log.Fatal(err)
+		}
+
+		fmt.Println("Day 10 results: -------")
+		fmt.Printf("Score: %d\n", result)
 	}
 }
