@@ -1,6 +1,11 @@
 package day11
 
-import "testing"
+import (
+	"fmt"
+	"testing"
+)
+
+var test = []int{125, 17}
 
 func TestCountDigits(t *testing.T) {
 	cases := []struct {
@@ -42,5 +47,39 @@ func TestSplitNumber(t *testing.T) {
 		if r != c.right {
 			t.Errorf("second half of %d is %d, but got %d", c.num, c.right, r)
 		}
+	}
+}
+
+func TestAlterStone(t *testing.T) {
+	cases := []struct {
+		num, stones, max int
+	}{
+		{test[0], 19025, 25},
+		{test[1], 36287, 25},
+		{test[0], 661984358, 50},
+		{test[1], 1238449243, 50},
+		{test[0], 22840618691206, 75},
+		{test[1], 42760419959276, 75},
+	}
+
+	for _, c := range cases {
+		t.Run(fmt.Sprintf("%d-%d", c.num, c.max), func(t *testing.T) {
+			cache := map[string]int{}
+			got := alterStone(c.num, 0, c.max, cache)
+			fmt.Println(got)
+
+			if got != c.stones {
+				t.Errorf("wanted %d, got %d", c.stones, got)
+			}
+		})
+	}
+}
+
+func TestDay11(t *testing.T) {
+	got := Day11(test)
+	want := 65601038650482
+
+	if got != want {
+		t.Errorf("expected %d stones, but got %d", want, got)
 	}
 }

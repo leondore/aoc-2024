@@ -7,6 +7,7 @@ import (
 
 	"github.com/leondore/aoc-2024/day1"
 	"github.com/leondore/aoc-2024/day10"
+	"github.com/leondore/aoc-2024/day11"
 	"github.com/leondore/aoc-2024/day2"
 	"github.com/leondore/aoc-2024/day3"
 	"github.com/leondore/aoc-2024/day4"
@@ -111,5 +112,11 @@ func main() {
 
 		fmt.Println("Day 10 results: -------")
 		fmt.Printf("Score: %d\n", result)
+	case "day11":
+		input := []int{0, 7, 198844, 5687836, 58, 2478, 25475, 894}
+		result := day11.Day11(input)
+
+		fmt.Println("Day 11 results: -------")
+		fmt.Printf("Stones produced: %d\n", result)
 	}
 }
